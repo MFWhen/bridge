@@ -8,7 +8,6 @@ export default function App() {
   const [expenses, setExpenses] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Deliverable 2: State & useEffect
   useEffect(() => {
     setTimeout(() => {
       setExpenses(mockExpenses);
@@ -24,7 +23,7 @@ export default function App() {
     setExpenses(prev => prev.filter(expense => expense.id !== id));
   };
 
-  // Deliverable 2: Conditional rendering
+ 
   if (loading) return <div>Loading...</div>;
 
   return (
