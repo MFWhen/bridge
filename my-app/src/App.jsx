@@ -16,14 +16,18 @@ export default function App() {
   }, []);
 
   const addExpense = (newExpense) => {
-    setExpenses(prev => [...prev, newExpense]);
+    console.log('Adding expense:', newExpense); 
+    try {
+      setExpenses(prev => [...prev, newExpense]);
+    } catch (error) {
+      console.error('Error adding expense:', error);
+    }
   };
 
   const deleteExpense = (id) => {
     setExpenses(prev => prev.filter(expense => expense.id !== id));
   };
 
- 
   if (loading) return <div>Loading...</div>;
 
   return (

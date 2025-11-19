@@ -13,7 +13,7 @@ export default function AddExpenseForm({ onAdd }) {
       category,
       description,
       id: Date.now(),
-      date: new Date()
+      date: new Date().toLocaleDateString()
     });
     setAmount('');
     setDescription('');
