@@ -14,8 +14,7 @@ Technologies Used:
 
 Frontend:
 React with React Router,
-Axios for API calls,
-Chart.js for data visualization
+Axios for API calls
 
 Backend:
 Node.js with Express.js,
