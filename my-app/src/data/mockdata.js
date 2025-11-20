@@ -4,4 +4,4 @@ export const mockExpenses = [
   { id: 3, amount: 89.99, category: 'Shopping', date: '2025-01-13', description: 'Clothes' }
 ];
 
-export const categories = ['Food', 'Transport', 'Shopping', 'Entertainment', 'Bills'];
+export const categories = ['Food', 'Transport', 'Shopping', 'Entertainment', 'Bills','Other'];
