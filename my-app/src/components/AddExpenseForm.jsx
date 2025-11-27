@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { categories } from '../data/mockData';
+import { expenseCategories } from '../data/mockdata';
 
 export default function AddExpenseForm({ onAdd }) {
   const [amount, setAmount] = useState('');
-  const [category, setCategory] = useState(categories[0]);
+  const [category, setCategory] = useState(expenseCategories[0]);
   const [description, setDescription] = useState('');
 
   const handleSubmit = (e) => {
@@ -35,7 +35,7 @@ export default function AddExpenseForm({ onAdd }) {
         onChange={(e) => setCategory(e.target.value)}
         style={{ margin: '0.5rem', padding: '0.5rem' }}
       >
-        {categories.map(cat => <option key={cat}>{cat}</option>)}
+        {expenseCategories.map(cat => <option key={cat}>{cat}</option>)}
       </select>
       <input
         type="text"

@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import ExpenseList from './components/ExpenseList';
 import AddExpenseForm from './components/AddExpenseForm';
-import { mockExpenses } from './data/mockData';
+import { mockExpenses } from './data/mockdata';
+import React from 'react';
+import NavigationBar from "./components/NavigationBar"; 
+import { BrowserRouter,Routes,Route } from "react-router-dom";
 
 export default function App() {
   const [expenses, setExpenses] = useState([]);
