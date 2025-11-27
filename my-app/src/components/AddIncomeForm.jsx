@@ -1,9 +1,23 @@
 import { useState } from "react";
 import { incomeCategories } from "../data/mockdata";
 
-export default function AddIncomeForm(){
+export default function AddIncomeForm({onAdd}){
     const [amount, setAmount] = useState('');
     const [category, setCategory] = useState(incomeCategories[0]);
+    const [description, setDescription] = useState('');
+
+    const handleSubmit = (e) => {
+    e.preventDefault();
+    onAdd({
+      amount: parseFloat(amount),
+      category,
+      description,
+      id: Date.now(),
+      date: new Date().toLocaleDateString()
+    });
+    setAmount('');
+    setDescription('');
+  };
     
     
     return(
@@ -23,7 +37,7 @@ export default function AddIncomeForm(){
                 onChange={(e) => setCategory(e.target.value)}
                 style={{ margin: '0.5rem', padding: '0.5rem' }}
             >
-                {categories.map(cat => <option key={cat}>{cat}</option>)}
+                {incomeCategories.map(cat => <option key={cat}>{cat}</option>)}
             </select>
             <input
                 type="text"

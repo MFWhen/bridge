@@ -1,45 +1,27 @@
-import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import ExpenseList from './components/ExpenseList';
-import AddExpenseForm from './components/AddExpenseForm';
-import { mockExpenses } from './data/mockdata';
-import React from 'react';
-import NavigationBar from "./components/NavigationBar"; 
-import { BrowserRouter,Routes,Route } from "react-router-dom";
+import NavigationBar from './components/NavigationBar';
+import ExpensesPage from './components/ExpensesPage';
+import IncomePage from './components/IncomePage';
+import LoginPage from './components/Login';
+import RegisterPage from './components/Register';
 
 export default function App() {
-  const [expenses, setExpenses] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setExpenses(mockExpenses);
-      setLoading(false);
-    }, 1000);
-  }, []);
-
-  const addExpense = (newExpense) => {
-    console.log('Adding expense:', newExpense); 
-    try {
-      setExpenses(prev => [...prev, newExpense]);
-    } catch (error) {
-      console.error('Error adding expense:', error);
-    }
-  };
-
-  const deleteExpense = (id) => {
-    setExpenses(prev => prev.filter(expense => expense.id !== id));
-  };
-
-  if (loading) return <div>Loading...</div>;
-
   return (
-    <div>
-      <Header />
-      <div style={{ padding: '1rem' }}>
-        <AddExpenseForm onAdd={addExpense} />
-        <ExpenseList expenses={expenses} onDelete={deleteExpense} />
+    <Router>
+      <div>
+        <Header />
+        <NavigationBar />
+        <div style={{ padding: '1rem' }}>
+          <Routes>
+            {/* Home page shows Expenses */}
+            <Route path="/" element={<ExpensesPage />} />
+            <Route path="/income" element={<IncomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }

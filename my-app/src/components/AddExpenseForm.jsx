@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { expenseCategories } from '../data/mockdata';
 
-export default function AddExpenseForm({ onAdd }) {
+export default function AddExpenseForm({onAdd}) {
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState(expenseCategories[0]);
   const [description, setDescription] = useState('');

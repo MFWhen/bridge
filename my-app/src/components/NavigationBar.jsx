@@ -7,17 +7,23 @@ import { Link } from "react-router-dom";
 
 function NavigationBar() { 
   return ( 
-    <Navbar bg="dark" data-bs-theme="dark" fixed="top"> 
+    <Navbar bg="light" data-bs-theme="light" fixed="top"> 
       <Container> 
         <Nav className="me-auto"> 
-          <Nav.Link> 
+        <Nav.Link> 
             <Link to="/">Expenses</Link> 
           </Nav.Link> 
           <Nav.Link> 
-            <Link to="/income">Incomes</Link> 
+            <Link to="/income"> Incomes</Link> 
           </Nav.Link> 
           <Nav.Link> 
-            <Link to="/profile">Profile</Link> 
+            <Link to="/login"> Sign In</Link> 
+          </Nav.Link>
+          <Nav.Link> 
+            <Link to="/register"> Sign Up</Link> 
+          </Nav.Link>
+          <Nav.Link> 
+            <Link to="/profile"> Profile</Link> 
           </Nav.Link> 
         </Nav> 
       </Container> 
