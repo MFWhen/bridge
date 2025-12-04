@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken"); 
+const jwt = require("json-web-token"); 
 require("dotenv").config(); 
  
 const isAuth = async (req, res, next) => { 

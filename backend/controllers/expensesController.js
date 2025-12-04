@@ -1,4 +1,4 @@
-import expenses from "../routes/expenses";
+import expenses from "../routes/expensesRoute";
 
 export const getExpenses = async(req , res) => {
     try{
