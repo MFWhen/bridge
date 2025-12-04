@@ -1,6 +1,7 @@
 const express = require("express");
 const userRoute = require("./routes/userRoute");
 const expenseRoute = require("./routes/expenseRoute");
+const incomeRoute = require("./routes/incomeRoute");
 const connectDb = require("./config/connectdb");
 const app = express();
 const dotenv = require("dotenv");
