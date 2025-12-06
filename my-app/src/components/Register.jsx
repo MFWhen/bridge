@@ -6,7 +6,6 @@ function Register() {
     userName: '',
     email: '',
     password: '',
-    age: '',
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -93,21 +92,6 @@ function Register() {
             onChange={handleChange}
             required
             minLength="6"
-            style={{ width: '100%', padding: '8px', fontSize: '16px' }}
-          />
-        </div>
-        <div style={{ marginBottom: '15px' }}>
-          <label htmlFor="age" style={{ display: 'block', marginBottom: '5px' }}>
-            Age (optional):
-          </label>
-          <input
-            type="number"
-            id="age"
-            name="age"
-            value={formData.age}
-            onChange={handleChange}
-            min="1"
-            max="120"
             style={{ width: '100%', padding: '8px', fontSize: '16px' }}
           />
         </div>
