@@ -14,8 +14,9 @@ export default function App() {
         <NavigationBar />
         <div style={{ padding: '1rem' }}>
           <Routes>
-            {/* Home page shows Expenses */}
-            <Route path="/" element={<ExpensesPage />} />
+    
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/expenses" element={<ExpensesPage />} />
             <Route path="/income" element={<IncomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />

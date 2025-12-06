@@ -5,11 +5,13 @@ require('dotenv').config();
 
 const getIncome = async (req, res) => {
   try {
-    const { user } = req.query;
-    const filter = {};
-    if (user) filter.user = user;
 
-    const income = await Income.find(filter).sort({ createdAt: -1 });
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ msg: "Authentication required" });
+    }
+
+    const income = await Income.find({ user: userId }).sort({ createdAt: -1 });
     if (income && income.length > 0) {
       return res.status(200).json({ income });
     }
@@ -35,7 +37,12 @@ const getOneIncome = async (req, res) => {
 const postIncome = async (req, res) => {
   const data = req.body;
   try {
-    const newIncome = new Income(data);
+
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ msg: "Authentication required" });
+    }
+    const newIncome = new Income({ ...data, user: userId });
     await newIncome.save();
     return res.status(201).json({ income: newIncome, msg: "Income created" });
   } catch (error) {

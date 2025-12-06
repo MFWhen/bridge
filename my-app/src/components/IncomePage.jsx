@@ -1,33 +1,61 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import IncomeList from './IncomeList';
 import AddIncomeForm from './AddIncomeForm';
-import { mockIncome } from '../data/mockdata';
+import { getIncome, addIncome as addIncomeAPI, deleteIncome as deleteIncomeAPI, isLoggedIn } from '../utils/api';
 
 export default function IncomePage() {
   const [income, setIncome] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setTimeout(() => {
-      setIncome(mockIncome);
-      setLoading(false);
-    }, 1000);
-  }, []);
+    // Check if user is logged in
+    if (!isLoggedIn()) {
+      navigate('/login');
+      return;
+    }
 
-  const addIncome = (newIncome) => {
-    console.log('Adding income:', newIncome); 
+    // Fetch income
+    const fetchIncome = async () => {
+      try {
+        const data = await getIncome();
+        setIncome(data.income || []);
+      } catch (err) {
+        console.error('Error fetching income:', err);
+        setError('Failed to load income');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchIncome();
+  }, [navigate]);
+
+  const addIncome = async (newIncome) => {
+    console.log('Adding income:', newIncome);
     try {
-      setIncome(prev => [...prev, newIncome]);
+      const data = await addIncomeAPI(newIncome);
+      setIncome(prev => [data.income, ...prev]);
     } catch (error) {
       console.error('Error adding income:', error);
+      alert('Failed to add income');
     }
   };
 
-  const deleteIncome = (id) => {
-    setIncome(prev => prev.filter(income => income.id !== id));
+  const deleteIncome = async (id) => {
+    try {
+      await deleteIncomeAPI(id);
+      setIncome(prev => prev.filter(income => income._id !== id));
+    } catch (error) {
+      console.error('Error deleting income:', error);
+      alert('Failed to delete income');
+    }
   };
 
   if (loading) return <div>Loading...</div>;
+  if (error) return <div style={{ color: 'red' }}>{error}</div>;
 
   return (
     <div>

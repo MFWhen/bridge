@@ -9,9 +9,9 @@ deleteExpense,
 } = require("../controllers/expenseController"); 
 const isAuth = require("../middleware/isAuth"); 
 const isAuthorized = require("../middleware/isAuthorized");
-expenseRoute.get("/expenses", getExpenses); 
-expenseRoute.get("/expenses/:id", isAuth,isAuthorized(['user']), getOneExpense); 
-expenseRoute.post("/expenses", postExpense); 
-expenseRoute.put("/expenses/:id", putExpense); 
-expenseRoute.delete("/expenses/:id",isAuth,isAuthorized(['admin']), deleteExpense); 
+expenseRoute.get("/expenses", isAuth, getExpenses); 
+expenseRoute.get("/expenses/:id", isAuth, getOneExpense); 
+expenseRoute.post("/expenses", isAuth, postExpense); 
+expenseRoute.put("/expenses/:id", isAuth, putExpense); 
+expenseRoute.delete("/expenses/:id", isAuth, deleteExpense); 
 module.exports = expenseRoute;

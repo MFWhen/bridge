@@ -1,9 +1,9 @@
-const jwt = require("json-web-token"); 
+const jwt = require("jsonwebtoken"); 
 require("dotenv").config(); 
  
 const isAuth = async (req, res, next) => { 
   try { 
- const token = req.header("Authorization")?.split(" ")[1];// Assuming Bearer token 
+    const token = req.header("Authorization")?.split(" ")[1]; // Assuming Bearer token 
     if (!token) { 
       return res.status(401).json({ msg: "No token, authorization denied" }); 
     } 
@@ -13,9 +13,9 @@ const isAuth = async (req, res, next) => {
   } catch (error) { 
     if (error.name === "TokenExpiredError") { 
       res.status(401).json({ msg: "Token expired" }); 
-} else { 
-res.status(500).json({ msg: "Server error" }); 
-} 
-} 
+    } else { 
+      res.status(500).json({ msg: "Server error" }); 
+    } 
+  } 
 }; 
 module.exports = isAuth; 

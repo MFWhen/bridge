@@ -5,11 +5,13 @@ require('dotenv').config();
 
 const getExpenses = async (req, res) => {
   try {
-    const { user } = req.query;
-    const filter = {};
-    if (user) filter.user = user;
+ 
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ msg: "Authentication required" });
+    }
 
-    const expenses = await Expense.find(filter).sort({ createdAt: -1 });
+    const expenses = await Expense.find({ user: userId }).sort({ createdAt: -1 });
     if (expenses && expenses.length > 0) {
       return res.status(200).json({ expenses });
     }
@@ -35,7 +37,12 @@ const getOneExpense = async (req, res) => {
 const postExpense = async (req, res) => {
   const data = req.body;
   try {
-    const newExpense = new Expense(data);
+   
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ msg: "Authentication required" });
+    }
+    const newExpense = new Expense({ ...data, user: userId });
     await newExpense.save();
     return res.status(201).json({ expense: newExpense, msg: "Expense created" });
   } catch (error) {
