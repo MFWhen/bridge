@@ -1,5 +1,5 @@
 
-const API_BASE_URL = 'http://localhost:6006';
+const API_BASE_URL = 'http://localhost:4167/api';
 
 
 export const getToken = () => {

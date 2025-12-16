@@ -24,7 +24,7 @@ function Register() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:3000/users', {
+      const response = await fetch('http://localhost:4167/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,79 +50,127 @@ function Register() {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px' }}>
-      <h1>Create Account</h1>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '15px' }}>
-          <label htmlFor="userName" style={{ display: 'block', marginBottom: '5px' }}>
-            Username:
-          </label>
-          <input
-            type="text"
-            id="userName"
-            name="userName"
-            value={formData.userName}
-            onChange={handleChange}
-            style={{ width: '100%', padding: '8px', fontSize: '16px' }}
-          />
-        </div>
-        <div style={{ marginBottom: '15px' }}>
-          <label htmlFor="email" style={{ display: 'block', marginBottom: '5px' }}>
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            style={{ width: '100%', padding: '8px', fontSize: '16px' }}
-          />
-        </div>
-        <div style={{ marginBottom: '15px' }}>
-          <label htmlFor="password" style={{ display: 'block', marginBottom: '5px' }}>
-            Password:
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            minLength="6"
-            style={{ width: '100%', padding: '8px', fontSize: '16px' }}
-          />
-        </div>
-        {error && (
-          <div style={{ color: 'red', marginBottom: '15px' }}>
-            {error}
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: 'calc(100vh - 170px)',
+      padding: '2rem 1rem'
+    }}>
+      <div style={{
+        width: '100%',
+        maxWidth: '420px',
+        background: 'white',
+        padding: '2.5rem',
+        borderRadius: '12px',
+        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)'
+      }}>
+        <h1 style={{
+          fontSize: '2em',
+          marginBottom: '1.5rem',
+          textAlign: 'center',
+          color: '#2d3748'
+        }}>Create Account</h1>
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: '1.5rem' }}>
+            <label htmlFor="userName" style={{
+              display: 'block',
+              marginBottom: '0.5rem',
+              fontWeight: '600',
+              color: '#374151'
+            }}>
+              Username
+            </label>
+            <input
+              type="text"
+              id="userName"
+              name="userName"
+              value={formData.userName}
+              onChange={handleChange}
+              placeholder="Choose a username"
+            />
           </div>
-        )}
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            width: '100%',
-            padding: '10px',
-            fontSize: '16px',
-            backgroundColor: '#28a745',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: loading ? 'not-allowed' : 'pointer',
-          }}
-        >
-          {loading ? 'Creating account...' : 'Register'}
-        </button>
-      </form>
-      <p style={{ marginTop: '20px', textAlign: 'center' }}>
-        Already have an account?{' '}
-        <a href="/login" style={{ color: '#007bff' }}>
-          Sign in here
-        </a>
-      </p>
+          <div style={{ marginBottom: '1.5rem' }}>
+            <label htmlFor="email" style={{
+              display: 'block',
+              marginBottom: '0.5rem',
+              fontWeight: '600',
+              color: '#374151'
+            }}>
+              Email Address
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+          <div style={{ marginBottom: '1.5rem' }}>
+            <label htmlFor="password" style={{
+              display: 'block',
+              marginBottom: '0.5rem',
+              fontWeight: '600',
+              color: '#374151'
+            }}>
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter a strong password"
+              required
+              minLength="6"
+            />
+          </div>
+          {error && (
+            <div style={{
+              background: '#fee',
+              color: '#c33',
+              padding: '0.75rem',
+              borderRadius: '6px',
+              marginBottom: '1.5rem',
+              border: '1px solid #fcc',
+              fontSize: '0.9em'
+            }}>
+              {error}
+            </div>
+          )}
+          <button
+            type="submit"
+            disabled={loading}
+            style={{
+              width: '100%',
+              padding: '0.8rem',
+              fontSize: '1em',
+              marginBottom: '1rem'
+            }}
+          >
+            {loading ? 'Creating account...' : 'Register'}
+          </button>
+        </form>
+        <p style={{
+          marginTop: '1.5rem',
+          textAlign: 'center',
+          color: '#6b7280',
+          fontSize: '0.95em'
+        }}>
+          Already have an account?{' '}
+          <a href="/login" style={{
+            color: '#2563eb',
+            fontWeight: '600',
+            textDecoration: 'none'
+          }}>
+            Sign in here
+          </a>
+        </p>
+      </div>
     </div>
   );
 }

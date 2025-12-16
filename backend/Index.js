@@ -15,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api", userRoute);
 app.use("/api", expenseRoute);
+app.use("/api", incomeRoute);
 
 app.listen(port, (err) => {
   if (err) {
