@@ -75,7 +75,6 @@ export const deleteExpense = (id) => apiRequest(`/expenses/${id}`, {
   method: 'DELETE',
 });
 
-// Income API calls
 export const getIncome = () => apiRequest('/income');
 export const addIncome = (income) => apiRequest('/income', {
   method: 'POST',
@@ -88,3 +87,5 @@ export const updateIncome = (id, income) => apiRequest(`/income/${id}`, {
 export const deleteIncome = (id) => apiRequest(`/income/${id}`, {
   method: 'DELETE',
 });
+
+export const getAdminData = () => apiRequest('/admin/data');

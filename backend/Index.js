@@ -2,6 +2,7 @@ const express = require("express");
 const userRoute = require("./routes/userRoute");
 const expenseRoute = require("./routes/expenseRoute");
 const incomeRoute = require("./routes/incomeRoute");
+const adminRoute = require("./routes/adminRoute");
 const connectDb = require("./config/connectdb");
 const app = express();
 const dotenv = require("dotenv");
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/api", userRoute);
 app.use("/api", expenseRoute);
 app.use("/api", incomeRoute);
+app.use("/api", adminRoute);
 
 app.listen(port, (err) => {
   if (err) {

@@ -25,11 +25,15 @@ function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        // Store token and user info in localStorage
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
-        // Redirect to expenses page
-        navigate('/expenses');
+        
+        // Route based on user role
+        if (data.user.role === 'admin') {
+          navigate('/admin');
+        } else {
+          navigate('/expenses');
+        }
       } else {
         setError(data.msg || 'Login failed');
       }

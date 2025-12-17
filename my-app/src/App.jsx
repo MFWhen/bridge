@@ -5,6 +5,7 @@ import ExpensesPage from './components/ExpensesPage';
 import IncomePage from './components/IncomePage';
 import LoginPage from './components/Login';
 import RegisterPage from './components/Register';
+import AdminDashboard from './components/AdminDashboard';
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
             <Route path="/income" element={<IncomePage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </div>
       </div>

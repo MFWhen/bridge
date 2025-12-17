@@ -3,12 +3,14 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav"; 
 import Navbar from "react-bootstrap/Navbar"; 
 import { Link, useNavigate } from "react-router-dom"; 
-import { isLoggedIn, logout } from "../utils/api";
+import { isLoggedIn, logout, getUser } from "../utils/api";
 
 
 function NavigationBar() { 
   const navigate = useNavigate();
   const loggedIn = isLoggedIn();
+  const user = getUser();
+  const isAdmin = user?.role === 'admin';
 
   const handleLogout = () => {
     logout();
@@ -26,18 +28,47 @@ function NavigationBar() {
       data-bs-theme="dark"
     > 
       <Container> 
-        <Nav className="me-auto" style={{ gap: '1.5rem' }}> 
+        <Nav 
+          className="me-auto d-flex align-items-center" 
+          style={{ columnGap: '1.5rem' }}
+        > 
           {loggedIn ? (
             <>
-              <Nav.Link style={{ transition: 'all 0.2s' }}> 
-                <Link to="/expenses" style={{ color: 'white', fontWeight: '600' }}>Expenses</Link> 
-              </Nav.Link> 
-              <Nav.Link style={{ transition: 'all 0.2s' }}> 
-                <Link to="/income" style={{ color: 'white', fontWeight: '600' }}>Income</Link> 
-              </Nav.Link>
-              <Nav.Link style={{ transition: 'all 0.2s' }}> 
-                <Link to="/profile" style={{ color: 'white', fontWeight: '600' }}>Profile</Link> 
-              </Nav.Link>
+              {isAdmin ? (
+                <>
+                  <Nav.Link
+                    as={Link}
+                    to="/admin"
+                    style={{ color: 'white', fontWeight: '600', transition: 'all 0.2s' }}
+                  >
+                    Database
+                  </Nav.Link>
+                </>
+              ) : (
+                <>
+                  <Nav.Link
+                    as={Link}
+                    to="/expenses"
+                    style={{ color: 'white', fontWeight: '600', transition: 'all 0.2s' }}
+                  >
+                    Expenses
+                  </Nav.Link> 
+                  <Nav.Link
+                    as={Link}
+                    to="/income"
+                    style={{ color: 'white', fontWeight: '600', transition: 'all 0.2s' }}
+                  >
+                    Income
+                  </Nav.Link>
+                  <Nav.Link
+                    as={Link}
+                    to="/profile"
+                    style={{ color: 'white', fontWeight: '600', transition: 'all 0.2s' }}
+                  >
+                    Profile
+                  </Nav.Link>
+                </>
+              )}
               <Nav.Link 
                 onClick={handleLogout} 
                 style={{ cursor: 'pointer', color: 'white', fontWeight: '600' }}
@@ -47,11 +78,11 @@ function NavigationBar() {
             </>
           ) : (
             <>
-              <Nav.Link> 
-                <Link to="/login" style={{ color: 'white', fontWeight: '600' }}>Sign In</Link> 
+              <Nav.Link as={Link} to="/login" style={{ color: 'white', fontWeight: '600' }}> 
+                Sign In
               </Nav.Link>
-              <Nav.Link> 
-                <Link to="/register" style={{ color: 'white', fontWeight: '600' }}>Sign Up</Link>
+              <Nav.Link as={Link} to="/register" style={{ color: 'white', fontWeight: '600' }}>
+                Sign Up
               </Nav.Link>
             </>
           )}

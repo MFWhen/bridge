@@ -11,13 +11,12 @@ export default function IncomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user is logged in
     if (!isLoggedIn()) {
       navigate('/login');
       return;
     }
 
-    // Fetch income
+   
     const fetchIncome = async () => {
       try {
         const data = await getIncome();
