@@ -28,7 +28,6 @@ function Login() {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
         
-        // Route based on user role
         if (data.user.role === 'admin') {
           navigate('/admin');
         } else {

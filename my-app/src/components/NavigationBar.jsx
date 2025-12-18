@@ -30,7 +30,7 @@ function NavigationBar() {
       <Container> 
         <Nav 
           className="me-auto d-flex align-items-center" 
-          style={{ columnGap: '1.5rem' }}
+          style={{ gap: '1.5rem' }}
         > 
           {loggedIn ? (
             <>
